@@ -12,7 +12,7 @@ const Input = React.forwardRef(function Input(
         ...slotProps,
         input: {
           className:
-            'h-12 w-full text-sm leading-5 px-3 py-2 rounded-md bg-transparent border-2 border-zinc-300 focus:border-indigo-400 outline-none placeholder:text-zinc-500',
+            'h-12 w-full text-sm leading-5 px-3 py-2 rounded-md bg-transparent border-2 border-zinc-300 focus:border-indigo-400 aria-[invalid=true]:border-red-500 outline-none placeholder:text-zinc-500',
         },
       }}
       ref={ref}
