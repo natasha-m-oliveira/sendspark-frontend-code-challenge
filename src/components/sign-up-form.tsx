@@ -5,6 +5,11 @@ import Input from '@/components/input'
 import { Formik, Field, Form } from 'formik'
 import * as yup from 'yup'
 import { ErrorMessage } from './error-message'
+import { api } from '@/data/api'
+import { Candidate } from '@/data/types/candidate'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
+import { AxiosError } from 'axios'
 
 const signUpSchema = yup.object().shape({
   firstName: yup.string().max(120).required().label('first name'),
@@ -31,8 +36,40 @@ const signUpFormInitialValues: yup.InferType<typeof signUpSchema> = {
 }
 
 export function SignUpForm() {
+  const router = useRouter()
+
   async function handleSignUp(values: yup.InferType<typeof signUpSchema>) {
-    console.log(values)
+    try {
+      const response = await api.post<Candidate>('/candidates', {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        company: values.company,
+        jobTitle: values.jobTitle || null,
+        workEmail: values.workEmail,
+        password: values.password,
+      })
+
+      const candidate = response.data
+
+      setTimeout(() => {
+        router.push(`/dashboard/${candidate.id}`)
+      }, 1000)
+
+      toast('Registration completed successfully', {
+        type: 'success',
+      })
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.data) {
+        const message = error.response.data.message
+        toast(Array.isArray(message) ? message[0] : message, {
+          type: 'error',
+        })
+      } else {
+        toast('Unable to complete registration', {
+          type: 'error',
+        })
+      }
+    }
   }
 
   return (

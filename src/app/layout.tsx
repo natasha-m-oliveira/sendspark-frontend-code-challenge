@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -16,7 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-orange-50 text-zinc-800">{children}</body>
+      <body className="bg-orange-50 text-zinc-800">
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          theme="light"
+        />
+
+        {children}
+      </body>
     </html>
   )
 }
