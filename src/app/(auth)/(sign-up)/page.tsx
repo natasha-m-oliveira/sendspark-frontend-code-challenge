@@ -2,7 +2,7 @@ import { SignUpForm } from '@/components/sign-up-form'
 
 export default function SignUp() {
   return (
-    <div className="md:w-auto">
+    <div>
       <h1 className="text-3xl text-center font-bold leading-tight">
         Nice to meet you!
       </h1>
