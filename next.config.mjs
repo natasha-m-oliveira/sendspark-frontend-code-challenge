@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination:
-          'https://sendspark-backend-code-challenge.vercel.app/:path*',
-      },
-    ]
+    return {
+      beforeFiles: [
+        {
+          source: '/api/:path*',
+          destination:
+            'https://sendspark-backend-code-challenge.vercel.app/:path*',
+        },
+      ],
+    }
   },
 }
 
