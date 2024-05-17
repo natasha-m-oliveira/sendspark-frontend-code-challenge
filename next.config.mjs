@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'sendspark-backend-code-challenge.vercel.app
+        destination: 'https://sendspark-backend-code-challenge.vercel.app
 /:path*',
       },
     ]
